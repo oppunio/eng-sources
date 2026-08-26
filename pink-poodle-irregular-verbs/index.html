@@ -693,7 +693,31 @@
     </style>
 </head>
 <body>
-
+    
+ <!-- ===== КНОПКА НАЗАД ===== -->
+    <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+    <a href="../" style="
+        display: inline-block;
+        padding: 12px 22px;
+        background: rgba(250, 248, 244, 0.92);
+        backdrop-filter: blur(8px);
+        border-radius: 30px;
+        border: 2px solid #D4E0C8;
+        text-decoration: none;
+        color: #4A6B3A;
+        font-family: 'Georgia', serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 15px rgba(85, 107, 47, 0.15);
+        transition: all 0.3s ease;
+    "
+    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 25px rgba(85,107,47,0.25)';"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(85,107,47,0.15)';"
+    >
+        🌿 Back to Games
+    </a>
+</div>
+    
     <!-- ===== DECORATIVE FLOATING ELEMENTS ===== -->
     <div class="floating-decor decor1">🎀</div>
     <div class="floating-decor decor2">✨</div>
