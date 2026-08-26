@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌿 Мои игры</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #F5F0E8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at 10% 20%, rgba(139, 195, 74, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(139, 195, 74, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            background: #FAF8F4;
+            border-radius: 40px 40px 40px 40px;
+            padding: 45px 40px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 
+                0 20px 60px rgba(85, 107, 47, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 2px solid #D4E0C8;
+            position: relative;
+        }
+
+        /* Декоративный элемент — как кружево или веточка */
+        .container::before {
+            content: "🌿🌱🌿";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            background: #FAF8F4;
+            padding: 0 15px;
+            color: #7A9B63;
+        }
+
+        .header-icon {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            letter-spacing: 6px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4A6B3A;
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8AA77B;
+            font-size: 1.05rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            border-top: 1px dashed #D4E0C8;
+            border-bottom: 1px dashed #D4E0C8;
+            padding: 10px 0;
+        }
+
+        .games-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* ===== РОЗОВЫЕ ПЛИТКИ ===== */
+        .game-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 24px;
+            background: #FFF5F7;
+            border-radius: 24px;
+            border: 2px solid #FDDDE6;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #4A6B3A;
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 100% 0%, rgba(255, 182, 193, 0.15), transparent 70%);
+            border-radius: 0 24px 0 100%;
+            pointer-events: none;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            border-color: #F8B4C8;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.25);
+        }
+
+        .game-card:active {
+            transform: scale(0.97);
+        }
+
+        .game-card .icon {
+            font-size: 2.4rem;
+            width: 50px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .game-card .info {
+            flex: 1;
+        }
+
+        .game-card .info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4A3F3A;
+            font-family: 'Georgia', serif;
+        }
+
+        .game-card .info p {
+            font-size: 0.9rem;
+            color: #B58B9A;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .game-card .arrow {
+            font-size: 1.5rem;
+            color: #E8B4C8;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .game-card:hover .arrow {
+            transform: translateX(5px);
+            color: #D489A8;
+        }
+
+        /* Статус-бейджи */
+        .status-badge {
+            display: inline-block;
+            background: #8CB07A;
+            color: white;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .status-badge.ready {
+            background: #8CB07A;
+        }
+
+        .status-badge.coming {
+            background: #D4C4A8;
+        }
+
+        /* Карточка "в разработке" — приглушённая */
+        .game-card.disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .game-card.disabled:hover {
+            transform: none;
+            border-color: #FDDDE6;
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.15);
+        }
+
+        .game-card.disabled .arrow {
+            color: #D4C4A8;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px dashed #D4E0C8;
+            color: #B8C9AA;
+            font-size: 0.9rem;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .footer .flowers {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 18px;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+            .game-card {
+                padding: 14px 16px;
+                gap: 12px;
+            }
+            .game-card .icon {
+                font-size: 1.8rem;
+                width: 40px;
+            }
+            .game-card .info h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Верхний декоративный ряд -->
+        <div class="header-icon">🌾 🍄 🌿</div>
+
+        <h1>🌱 Мои игры</h1>
+        <p class="subtitle">~ уютный уголок для вдохновения ~</p>
+
+        <div class="games-grid">
+
+            <!-- ===== ИГРА 1 ===== -->
+            <a href="poodle-verbs/" class="game-card">
+                <span class="icon">🐶</span>
+                <div class="info">
+                    <h3>Pink Poodle Verbs</h3>
+                    <p>🇷🇺 Учим неправильные глаголы</p>
+                    <span class="status-badge ready">✨ готова</span>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <!-- ===== ИГРА 2 (заглушка) ===== -->
+            <div class="game-card disabled">
+                <span class="icon">🌻</span>
+                <div class="info">
+                    <h3>Тёплая история</h3>
+                    <p>скоро здесь появится...</p>
+                    <span class="status-badge coming">🌱 в разработке</span>
+                </div>
+                <span class="arrow">🔒</span>
+            </div>
+
+            <!-- ===== ИГРА 3 (заглушка) ===== -->
+            <div class="game-card disabled">
+                <span class="icon">🍯</span>
+                <div class="info">
+                    <h3>Медовая викторина</h3>
+                    <p>идея для будущего проекта</p>
+                    <span class="status-badge coming">💭 планируется</span>
+                </div>
+                <span class="arrow">🔒</span>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <div class="flowers">🌷 🐝 🌷</div>
+            сделано с теплом и чаем 🍵
+        </div>
+
+    </div>
+</body>
+</html>
