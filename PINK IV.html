@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pink Poodle Verbs 🐾</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', Arial, sans-serif;
+            background: #FFF0F5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ===== DECORATIVE FLOATING ELEMENTS ===== */
+        .floating-decor {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            opacity: 0.4;
+            animation: floatAnim 8s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes floatAnim {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-40px) rotate(15deg); }
+        }
+
+        .decor1 { top: 5%; left: 3%; animation-delay: 0s; font-size: 2.5rem; }
+        .decor2 { top: 15%; right: 5%; animation-delay: 1s; font-size: 2rem; }
+        .decor3 { bottom: 20%; left: 5%; animation-delay: 2s; font-size: 3rem; }
+        .decor4 { bottom: 10%; right: 3%; animation-delay: 0.5s; font-size: 2.2rem; }
+        .decor5 { top: 45%; left: 2%; animation-delay: 1.5s; font-size: 1.8rem; }
+        .decor6 { top: 50%; right: 2%; animation-delay: 2.5s; font-size: 2rem; }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 95%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.25);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #C71585;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(255, 105, 180, 0.3);
+        }
+
+        .header h1 span {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .header .paw-print {
+            color: #FF69B4;
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #C71585;
+            background: rgba(255, 182, 193, 0.3);
+            padding: 6px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .score-display .score-value {
+            color: #FF1493;
+            font-size: 1.6rem;
+        }
+
+        /* ===== SCREENS ===== */
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== HOME SCREEN ===== */
+        .home-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #FF1493;
+            margin-bottom: 5px;
+        }
+
+        .home-subtitle {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #FF69B4;
+            margin-bottom: 20px;
+        }
+
+        .mode-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mode-btn {
+            padding: 18px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Quicksand', Arial, sans-serif;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mode-btn:hover {
+            transform: scale(1.03);
+        }
+
+        .mode-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mode-btn .mode-icon {
+            font-size: 1.6rem;
+        }
+
+        .mode-btn .mode-label {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        .mode-btn.mode1 {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+        }
+        .mode-btn.mode2 {
+            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+        }
+        .mode-btn.mode3 {
+            background: linear-gradient(135deg, #C71585, #8B008B);
+        }
+
+        /* ===== GAME SCREEN ===== */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .back-btn {
+            background: rgba(255, 182, 193, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 182, 193, 0.8);
+            transform: rotate(-10deg);
+        }
+
+        .game-mode-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #C71585;
+        }
+
+        .game-progress {
+            font-size: 0.9rem;
+            color: #FF69B4;
+            font-weight: 600;
+        }
+
+        .question-area {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .question-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #C71585;
+            margin-bottom: 5px;
+        }
+
+        .question-hint {
+            font-size: 1rem;
+            color: #FF69B4;
+            margin-bottom: 15px;
+        }
+
+        .question-ru {
+            font-size: 1.3rem;
+            color: #FF1493;
+            background: rgba(255, 182, 193, 0.2);
+            padding: 5px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* ===== MODE 1 - TILES ===== */
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tile-btn {
+            padding: 14px 10px;
+            border: 3px solid #FFB6C1;
+            border-radius: 18px;
+            background: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #C71585;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.1);
+            font-family: 'Quicksand', Arial, sans-serif;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .tile-btn:hover {
+            transform: scale(1.03);
+            border-color: #FF69B4;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.25);
+        }
+
+        .tile-btn:active {
+            transform: scale(0.93);
+        }
+
+        .tile-btn.correct {
+            border-color: #32CD32;
+            background: #E8F5E9;
+            animation: popCorrect 0.4s ease;
+        }
+
+        .tile-btn.wrong {
+            border-color: #FF4444;
+            background: #FFEBEE;
+            animation: shake 0.4s ease;
+        }
+
+        .tile-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        @keyframes popCorrect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* ===== MODE 2 - INPUTS ===== */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .input-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .input-row label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #FF69B4;
+        }
+
+        .input-row input {
+            width: 80%;
+            max-width: 250px;
+            padding: 12px 18px;
+            border: 3px solid #FFB6C1;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', Arial, sans-serif;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: white;
+            color: #C71585;
+            font-weight: 600;
+        }
+
+        .input-row input:focus {
+            outline: none;
+            border-color: #FF69B4;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
+        }
+
+        .input-row input.correct-input {
+            border-color: #32CD32;
+            background: #E8F5E9;
+        }
+
+        .input-row input.wrong-input {
+            border-color: #FF4444;
+            background: #FFEBEE;
+            animation: shake 0.4s ease;
+        }
+
+        .submit-answer-btn {
+            margin-top: 15px;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Quicksand', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
+        }
+
+        .submit-answer-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .submit-answer-btn:active {
+            transform: scale(0.95);
+        }
+
+        .submit-answer-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ===== MODE 3 - SENTENCE ===== */
+        .sentence-display {
+            font-size: 1.3rem;
+            color: #C71585;
+            background: rgba(255, 182, 193, 0.15);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .sentence-display .wrong-word {
+            background: #FF6B6B;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 12px;
+            text-decoration: underline wavy white;
+            display: inline-block;
+        }
+
+        .dropdown-group {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-group select {
+            padding: 14px 30px;
+            border: 3px solid #FFB6C1;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', Arial, sans-serif;
+            background: white;
+            color: #C71585;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 80%;
+            max-width: 280px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FF69B4' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+
+        .dropdown-group select:focus {
+            outline: none;
+            border-color: #FF69B4;
+        }
+
+        .dropdown-group select.correct-select {
+            border-color: #32CD32;
+            background-color: #E8F5E9;
+        }
+
+        .dropdown-group select.wrong-select {
+            border-color: #FF4444;
+            background-color: #FFEBEE;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            min-height: 40px;
+        }
+
+        .feedback.correct {
+            color: #32CD32;
+        }
+
+        .feedback.wrong {
+            color: #FF4444;
+        }
+
+        /* ===== NEXT BUTTON ===== */
+        .next-btn {
+            display: none;
+            margin: 15px auto 0;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Quicksand', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.2);
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .next-btn:active {
+            transform: scale(0.95);
+        }
+
+        .next-btn.show {
+            display: block;
+        }
+
+        /* ===== MILESTONE MODAL ===== */
+        .milestone-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .milestone-overlay.active {
+            display: flex;
+        }
+
+        .milestone-modal {
+            background: linear-gradient(135deg, #FFF0F5, #FFE4EC);
+            border-radius: 50px;
+            padding: 40px 35px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.4);
+            border: 3px solid #FF69B4;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .milestone-modal .puppies {
+            font-size: 4.5rem;
+            line-height: 1.4;
+            animation: bounce 1.5s infinite;
+        }
+
+        .milestone-modal h2 {
+            font-size: 2.8rem;
+            color: #FF1493;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            margin: 10px 0;
+        }
+
+        .milestone-modal .sparkles {
+            font-size: 2rem;
+            letter-spacing: 8px;
+            animation: sparkle 1.5s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.4; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .milestone-modal .milestone-btn {
+            margin-top: 20px;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Quicksand', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .milestone-modal .milestone-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== CONFETTI ===== */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-20px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        .container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .container::-webkit-scrollbar-track {
+            background: #FFE4EC;
+            border-radius: 10px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background: #FF69B4;
+            border-radius: 10px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+                border-radius: 30px;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            .question-text {
+                font-size: 1.6rem;
+            }
+            .tiles-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .tile-btn {
+                font-size: 0.8rem;
+                padding: 10px 8px;
+                min-height: 55px;
+            }
+            .sentence-display {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+            .milestone-modal {
+                padding: 30px 20px;
+            }
+            .milestone-modal h2 {
+                font-size: 2rem;
+            }
+            .milestone-modal .puppies {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .tiles-grid {
+                grid-template-columns: 1fr;
+            }
+            .mode-btn {
+                font-size: 0.95rem;
+                padding: 14px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== DECORATIVE FLOATING ELEMENTS ===== -->
+    <div class="floating-decor decor1">🎀</div>
+    <div class="floating-decor decor2">✨</div>
+    <div class="floating-decor decor3">💖</div>
+    <div class="floating-decor decor4">🎀</div>
+    <div class="floating-decor decor5">🐾</div>
+    <div class="floating-decor decor6">✨</div>
+
+    <!-- ===== CONFETTI CONTAINER ===== -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- ===== MILESTONE OVERLAY ===== -->
+    <div class="milestone-overlay" id="milestoneOverlay">
+        <div class="milestone-modal">
+            <div class="sparkles">✨ 💖 ✨</div>
+            <div class="puppies">🐶 🐕 🐾</div>
+            <h2>PAW-some!</h2>
+            <div class="puppies" style="font-size:3rem; margin-top:5px;">🐶 🐶 🐶</div>
+            <div class="sparkles" style="margin-top:5px;">✨ 🎀 ✨</div>
+            <button class="milestone-btn" id="milestoneBtn">Keep Going! 🐾</button>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container" id="app">
+
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <h1>🐾 Pink Poodle Verbs <span>🎀</span></h1>
+            <div class="paw-print">🐾 🐾 🐾</div>
+            <div class="score-display">
+                🏆 Score: <span class="score-value" id="scoreDisplay">0</span>
+            </div>
+        </div>
+
+        <!-- ===== HOME SCREEN ===== -->
+        <div class="screen active" id="homeScreen">
+            <div class="home-title">🌸 Choose Your Mode 🌸</div>
+            <div class="home-subtitle">🐶 Learn irregular verbs with fun!</div>
+            <div class="mode-grid">
+                <button class="mode-btn mode1" data-mode="1">
+                    <span class="mode-icon">🇷🇺</span>
+                    <div>
+                        <div>Russian Roulette</div>
+                        <div class="mode-label">Match Russian → 3 English forms</div>
+                    </div>
+                </button>
+                <button class="mode-btn mode2" data-mode="2">
+                    <span class="mode-icon">✍️</span>
+                    <div>
+                        <div>Spelling Star</div>
+                        <div class="mode-label">Type Past & Participle</div>
+                    </div>
+                </button>
+                <button class="mode-btn mode3" data-mode="3">
+                    <span class="mode-icon">🔍</span>
+                    <div>
+                        <div>Grammar Guru</div>
+                        <div class="mode-label">Fix the wrong form</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== GAME SCREEN ===== -->
+        <div class="screen" id="gameScreen">
+            <div class="game-header">
+                <button class="back-btn" id="backBtn">⬅</button>
+                <span class="game-mode-title" id="gameModeTitle">Mode 1</span>
+                <span class="game-progress" id="gameProgress">1/30</span>
+            </div>
+
+            <div class="question-area" id="questionArea">
+                <!-- DYNAMIC CONTENT -->
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+            <button class="next-btn" id="nextBtn">Next ➜</button>
+        </div>
+
+    </div>
+
+    <script>
+        // ================================================================
+        //  VERB LISTS
+        // ================================================================
+
+        const verbsMode1 = [
+            { base: "be", past: "was/were", participle: "been", ru: "быть" },
+            { base: "beat", past: "beat", participle: "beaten", ru: "бить" },
+            { base: "become", past: "became", participle: "become", ru: "становиться" },
+            { base: "begin", past: "began", participle: "begun", ru: "начинать" },
+            { base: "build", past: "built", participle: "built", ru: "строить" },
+            { base: "bite", past: "bit", participle: "bitten", ru: "кусать" },
+            { base: "blow", past: "blew", participle: "blown", ru: "дуть" },
+            { base: "break", past: "broke", participle: "broken", ru: "ломать" },
+            { base: "bring", past: "brought", participle: "brought", ru: "приносить" },
+            { base: "burn", past: "burnt", participle: "burnt", ru: "сжигать" },
+            { base: "buy", past: "bought", participle: "bought", ru: "покупать" },
+            { base: "catch", past: "caught", participle: "caught", ru: "ловить" },
+            { base: "choose", past: "chose", participle: "chosen", ru: "выбирать" },
+            { base: "come", past: "came", participle: "come", ru: "приходить" },
+            { base: "cost", past: "cost", participle: "cost", ru: "стоить" },
+            { base: "creep", past: "crept", participle: "crept", ru: "ползать" },
+            { base: "cut", past: "cut", participle: "cut", ru: "резать" },
+            { base: "deal", past: "dealt", participle: "dealt", ru: "иметь дело" },
+            { base: "dig", past: "dug", participle: "dug", ru: "копать" },
+            { base: "do", past: "did", participle: "done", ru: "делать" },
+            { base: "draw", past: "drew", participle: "drawn", ru: "рисовать" },
+            { base: "drink", past: "drank", participle: "drunk", ru: "пить" },
+            { base: "drive", past: "drove", participle: "driven", ru: "водить" },
+            { base: "eat", past: "ate", participle: "eaten", ru: "есть" },
+            { base: "fall", past: "fell", participle: "fallen", ru: "падать" },
+            { base: "feed", past: "fed", participle: "fed", ru: "кормить" },
+            { base: "feel", past: "felt", participle: "felt", ru: "чувствовать" },
+            { base: "fight", past: "fought", participle: "fought", ru: "сражаться" },
+            { base: "find", past: "found", participle: "found", ru: "находить" },
+            { base: "fit", past: "fit", participle: "fit", ru: "быть впору" }
+        ];
+
+        const verbsMode2 = [
+            { base: "fly", past: "flew", participle: "flown", ru: "летать" },
+            { base: "forbid", past: "forbade", participle: "forbidden", ru: "запрещать" },
+            { base: "forget", past: "forgot", participle: "forgotten", ru: "забывать" },
+            { base: "forgive", past: "forgave", participle: "forgiven", ru: "прощать" },
+            { base: "freeze", past: "froze", participle: "frozen", ru: "замерзать" },
+            { base: "get", past: "got", participle: "got", ru: "получать" },
+            { base: "give", past: "gave", participle: "given", ru: "давать" },
+            { base: "go", past: "went", participle: "gone", ru: "ходить" },
+            { base: "grow", past: "grew", participle: "grown", ru: "расти" },
+            { base: "have", past: "had", participle: "had", ru: "иметь" },
+            { base: "hear", past: "heard", participle: "heard", ru: "слышать" },
+            { base: "hide", past: "hid", participle: "hidden", ru: "прятать" },
+            { base: "hit", past: "hit", participle: "hit", ru: "ударять" },
+            { base: "hold", past: "held", participle: "held", ru: "держать" },
+            { base: "hurt", past: "hurt", participle: "hurt", ru: "причинять боль" },
+            { base: "keep", past: "kept", participle: "kept", ru: "хранить" },
+            { base: "know", past: "knew", participle: "known", ru: "знать" },
+            { base: "learn", past: "learnt", participle: "learnt", ru: "изучать" },
+            { base: "leave", past: "left", participle: "left", ru: "покидать" },
+            { base: "lend", past: "lent", participle: "lent", ru: "давать взаймы" },
+            { base: "let", past: "let", participle: "let", ru: "позволять" },
+            { base: "lie", past: "lay", participle: "lain", ru: "лежать" },
+            { base: "lose", past: "lost", participle: "lost", ru: "терять" },
+            { base: "make", past: "made", participle: "made", ru: "делать руками" },
+            { base: "mean", past: "meant", participle: "meant", ru: "иметь в виду" },
+            { base: "meet", past: "met", participle: "met", ru: "встречать" },
+            { base: "pay", past: "paid", participle: "paid", ru: "платить" },
+            { base: "put", past: "put", participle: "put", ru: "класть" },
+            { base: "read", past: "read", participle: "read", ru: "читать" },
+            { base: "ride", past: "rode", participle: "ridden", ru: "ездить верхом" }
+        ];
+
+        const verbsMode3 = [
+            { base: "ring", past: "rang", participle: "rung", ru: "звонить" },
+            { base: "run", past: "ran", participle: "run", ru: "бежать" },
+            { base: "rise", past: "rose", participle: "risen", ru: "подниматься" },
+            { base: "say", past: "said", participle: "said", ru: "сказать" },
+            { base: "see", past: "saw", participle: "seen", ru: "видеть" },
+            { base: "sell", past: "sold", participle: "sold", ru: "продавать" },
+            { base: "send", past: "sent", participle: "sent", ru: "посылать" },
+            { base: "shake", past: "shook", participle: "shaken", ru: "трясти(сь)" },
+            { base: "shoot", past: "shot", participle: "shot", ru: "стрелять" },
+            { base: "show", past: "showed", participle: "shown", ru: "показывать" },
+            { base: "shut", past: "shut", participle: "shut", ru: "закрывать" },
+            { base: "sing", past: "sang", participle: "sung", ru: "петь" },
+            { base: "sit", past: "sat", participle: "sat", ru: "сидеть" },
+            { base: "sleep", past: "slept", participle: "slept", ru: "спать" },
+            { base: "speak", past: "spoke", participle: "spoken", ru: "говорить" },
+            { base: "spend", past: "spent", participle: "spent", ru: "проводить, тратить" },
+            { base: "stand", past: "stood", participle: "stood", ru: "стоять" },
+            { base: "steal", past: "stole", participle: "stolen", ru: "воровать" },
+            { base: "swear", past: "swore", participle: "sworn", ru: "клясться, материться" },
+            { base: "sweep", past: "swept", participle: "swept", ru: "подметать" },
+            { base: "swim", past: "swam", participle: "swum", ru: "плавать" },
+            { base: "take", past: "took", participle: "taken", ru: "брать" },
+            { base: "teach", past: "taught", participle: "taught", ru: "учить" },
+            { base: "tell", past: "told", participle: "told", ru: "рассказывать" },
+            { base: "think", past: "thought", participle: "thought", ru: "думать" },
+            { base: "throw", past: "threw", participle: "thrown", ru: "бросать" },
+            { base: "understand", past: "understood", participle: "understood", ru: "понимать" },
+            { base: "wake", past: "woke", participle: "woken", ru: "будить" },
+            { base: "wear", past: "wore", participle: "worn", ru: "носить на себе" },
+            { base: "win", past: "won", participle: "won", ru: "выигрывать" },
+            { base: "write", past: "wrote", participle: "written", ru: "писать" }
+        ];
+
+        // Mode 3 sentences with WRONG forms highlighted
+        const mode3Sentences = [
+            { verb: verbsMode3[0], sentence: 'Yesterday the phone <span class="wrong-word">rung</span> three times.', wrong: 'rung', correct: 'rang' },
+            { verb: verbsMode3[1], sentence: 'She has <span class="wrong-word">ran</span> 5 kilometers today.', wrong: 'ran', correct: 'run' },
+            { verb: verbsMode3[2], sentence: 'The sun has <span class="wrong-word">rose</span> early today.', wrong: 'rose', correct: 'risen' },
+            { verb: verbsMode3[3], sentence: 'He <span class="wrong-word">sayed</span> hello to everyone.', wrong: 'sayed', correct: 'said' },
+            { verb: verbsMode3[4], sentence: 'I <span class="wrong-word">seed</span> him yesterday.', wrong: 'seed', correct: 'saw' },
+            { verb: verbsMode3[5], sentence: 'She has <span class="wrong-word">selled</span> her old car.', wrong: 'selled', correct: 'sold' },
+            { verb: verbsMode3[6], sentence: 'They have <span class="wrong-word">sended</span> the package.', wrong: 'sended', correct: 'sent' },
+            { verb: verbsMode3[7], sentence: 'The ground <span class="wrong-word">shaked</span> during the earthquake.', wrong: 'shaked', correct: 'shook' },
+            { verb: verbsMode3[8], sentence: 'He <span class="wrong-word">shooted</span> the target.', wrong: 'shooted', correct: 'shot' },
+            { verb: verbsMode3[9], sentence: 'She has <span class="wrong-word">showed</span> me the way.', wrong: 'showed', correct: 'shown' },
+            { verb: verbsMode3[10], sentence: 'He <span class="wrong-word">shutted</span> the door loudly.', wrong: 'shutted', correct: 'shut' },
+            { verb: verbsMode3[11], sentence: 'She <span class="wrong-word">singed</span> a beautiful song.', wrong: 'singed', correct: 'sang' },
+            { verb: verbsMode3[12], sentence: 'We have <span class="wrong-word">sitted</span> here for hours.', wrong: 'sitted', correct: 'sat' },
+            { verb: verbsMode3[13], sentence: 'The baby <span class="wrong-word">sleeped</span> all night.', wrong: 'sleeped', correct: 'slept' },
+            { verb: verbsMode3[14], sentence: 'He <span class="wrong-word">speaked</span> very clearly.', wrong: 'speaked', correct: 'spoke' },
+            { verb: verbsMode3[15], sentence: 'She has <span class="wrong-word">spended</span> all her money.', wrong: 'spended', correct: 'spent' },
+            { verb: verbsMode3[16], sentence: 'They have <span class="wrong-word">standed</span> there for an hour.', wrong: 'standed', correct: 'stood' },
+            { verb: verbsMode3[17], sentence: 'Someone <span class="wrong-word">stealed</span> my wallet.', wrong: 'stealed', correct: 'stole' },
+            { verb: verbsMode3[18], sentence: 'He <span class="wrong-word">swore</span> at the driver.', wrong: 'swore', correct: 'swore' },
+            { verb: verbsMode3[19], sentence: 'She has <span class="wrong-word">sweeped</span> the floor.', wrong: 'sweeped', correct: 'swept' },
+            { verb: verbsMode3[20], sentence: 'They have <span class="wrong-word">swam</span> across the lake.', wrong: 'swam', correct: 'swum' },
+            { verb: verbsMode3[21], sentence: 'He has <span class="wrong-word">taked</span> my book.', wrong: 'taked', correct: 'taken' },
+            { verb: verbsMode3[22], sentence: 'She <span class="wrong-word">teached</span> me English.', wrong: 'teached', correct: 'taught' },
+            { verb: verbsMode3[23], sentence: 'He <span class="wrong-word">telled</span> me the truth.', wrong: 'telled', correct: 'told' },
+            { verb: verbsMode3[24], sentence: 'I <span class="wrong-word">thinked</span> about you.', wrong: 'thinked', correct: 'thought' },
+            { verb: verbsMode3[25], sentence: 'He has <span class="wrong-word">throwed</span> the ball.', wrong: 'throwed', correct: 'thrown' },
+            { verb: verbsMode3[26], sentence: 'She has <span class="wrong-word">understanded</span> the problem.', wrong: 'understanded', correct: 'understood' },
+            { verb: verbsMode3[27], sentence: 'The noise <span class="wrong-word">waked</span> me up.', wrong: 'waked', correct: 'woke' },
+            { verb: verbsMode3[28], sentence: 'She has <span class="wrong-word">worn</span> a red dress yesterday.', wrong: 'worn', correct: 'wore' },
+            { verb: verbsMode3[29], sentence: 'We have <span class="wrong-word">winned</span> the competition.', wrong: 'winned', correct: 'won' },
+            { verb: verbsMode3[30], sentence: 'He has <span class="wrong-word">writed</span> a long letter.', wrong: 'writed', correct: 'written' }
+        ];
+
+        // ================================================================
+        //  GAME CLASS
+        // ================================================================
+
+        class Game {
+            constructor() {
+                this.score = 0;
+                this.correctCount = 0;
+                this.currentMode = 1;
+                this.currentIndex = 0;
+                this.questions = [];
+                this.isAnswered = false;
+                this.totalQuestions = 30;
+                this.lastMilestoneCount = 0;
+
+                this.scoreDisplay = document.getElementById('scoreDisplay');
+                this.feedback = document.getElementById('feedback');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.questionArea = document.getElementById('questionArea');
+                this.gameModeTitle = document.getElementById('gameModeTitle');
+                this.gameProgress = document.getElementById('gameProgress');
+
+                this.initEventListeners();
+            }
+
+            initEventListeners() {
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const mode = parseInt(btn.dataset.mode);
+                        this.startMode(mode);
+                    });
+                });
+
+                document.getElementById('backBtn').addEventListener('click', () => {
+                    this.goHome();
+                });
+
+                this.nextBtn.addEventListener('click', () => {
+                    this.nextQuestion();
+                });
+
+                document.getElementById('milestoneBtn').addEventListener('click', () => {
+                    document.getElementById('milestoneOverlay').classList.remove('active');
+                });
+            }
+
+            startMode(mode) {
+                this.currentMode = mode;
+                this.currentIndex = 0;
+                this.isAnswered = false;
+                this.lastMilestoneCount = 0;
+                this.questions = [];
+
+                if (mode === 1) {
+                    this.questions = this.shuffleArray([...verbsMode1]);
+                    this.gameModeTitle.textContent = '🇷🇺 Russian Roulette';
+                } else if (mode === 2) {
+                    this.questions = this.shuffleArray([...verbsMode2]);
+                    this.gameModeTitle.textContent = '✍️ Spelling Star';
+                } else if (mode === 3) {
+                    this.questions = this.shuffleArray([...mode3Sentences]);
+                    this.gameModeTitle.textContent = '🔍 Grammar Guru';
+                }
+
+                this.totalQuestions = this.questions.length;
+
+                document.getElementById('homeScreen').classList.remove('active');
+                document.getElementById('gameScreen').classList.add('active');
+
+                this.renderQuestion();
+            }
+
+            renderQuestion() {
+                this.isAnswered = false;
+                this.feedback.textContent = '';
+                this.feedback.className = 'feedback';
+                this.nextBtn.classList.remove('show');
+
+                const q = this.questions[this.currentIndex];
+                this.gameProgress.textContent = `${this.currentIndex + 1}/${this.totalQuestions}`;
+
+                let html = '';
+
+                if (this.currentMode === 1) {
+                    html = this.renderMode1(q);
+                } else if (this.currentMode === 2) {
+                    html = this.renderMode2(q);
+                } else if (this.currentMode === 3) {
+                    html = this.renderMode3(q);
+                }
+
+                this.questionArea.innerHTML = html;
+
+                // Attach event listeners
+                if (this.currentMode === 1) {
+                    document.querySelectorAll('.tile-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            if (!this.isAnswered) {
+                                this.handleMode1Answer(e.target);
+                            }
+                        });
+                    });
+                } else if (this.currentMode === 2) {
+                    const submitBtn = document.getElementById('submitMode2');
+                    if (submitBtn) {
+                        submitBtn.addEventListener('click', () => {
+                            if (!this.isAnswered) {
+                                this.handleMode2Answer();
+                            }
+                        });
+                    }
+                    document.querySelectorAll('#mode2-past, #mode2-participle').forEach(inp => {
+                        inp.addEventListener('keypress', (e) => {
+                            if (e.key === 'Enter' && !this.isAnswered) {
+                                this.handleMode2Answer();
+                            }
+                        });
+                    });
+                } else if (this.currentMode === 3) {
+                    const select = document.getElementById('mode3-select');
+                    if (select) {
+                        select.addEventListener('change', () => {
+                            if (!this.isAnswered) {
+                                this.handleMode3Answer();
+                            }
+                        });
+                    }
+                }
+            }
+
+            // ============================================================
+            //  MODE 1: RUSSIAN ROULETTE
+            // ============================================================
+
+            renderMode1(verb) {
+                const others = this.questions.filter(v => v !== verb);
+                const shuffledOthers = this.shuffleArray(others);
+                const wrongs = shuffledOthers.slice(0, 3);
+
+                let options = [
+                    { verb: verb, correct: true },
+                    ...wrongs.map(v => ({ verb: v, correct: false }))
+                ];
+                options = this.shuffleArray(options);
+
+                let tilesHtml = options.map((opt) => {
+                    const v = opt.verb;
+                    const label = `${v.base} - ${v.past} - ${v.participle}`;
+                    const dataCorrect = opt.correct ? 'true' : 'false';
+                    return `<button class="tile-btn" data-correct="${dataCorrect}">${label}</button>`;
+                }).join('');
+
+                return `
+                    <div class="question-ru">🇷🇺 ${verb.ru}</div>
+                    <div class="question-text">Choose the correct English forms:</div>
+                    <div class="tiles-grid">${tilesHtml}</div>
+                `;
+            }
+
+            handleMode1Answer(btn) {
+                this.isAnswered = true;
+                const isCorrect = btn.dataset.correct === 'true';
+
+                document.querySelectorAll('.tile-btn').forEach(b => {
+                    b.classList.add('disabled');
+                    if (b.dataset.correct === 'true') {
+                        b.classList.add('correct');
+                    }
+                });
+
+                if (isCorrect) {
+                    btn.classList.add('correct');
+                    this.updateScore(10);
+                    this.feedback.textContent = '✅ Correct! +10 points! 🎉';
+                    this.feedback.className = 'feedback correct';
+                    this.correctCount++;
+                    this.checkMilestone();
+                } else {
+                    btn.classList.add('wrong');
+                    this.updateScore(-10);
+                    this.feedback.textContent = '❌ Wrong! -10 points. 😅';
+                    this.feedback.className = 'feedback wrong';
+                }
+
+                this.showNextButton();
+            }
+
+            // ============================================================
+            //  MODE 2: SPELLING STAR (FIXED!)
+            // ============================================================
+
+            renderMode2(verb) {
+                return `
+                    <div class="question-text">${verb.base}</div>
+                    <div class="question-ru">🇷🇺 ${verb.ru}</div>
+                    <div class="question-hint">✍️ Type the Past Simple and Past Participle:</div>
+                    <div class="input-group">
+                        <div class="input-row">
+                            <label>Past Simple:</label>
+                            <input type="text" id="mode2-past" placeholder="e.g. went" autocomplete="off">
+                        </div>
+                        <div class="input-row">
+                            <label>Past Participle:</label>
+                            <input type="text" id="mode2-participle" placeholder="e.g. gone" autocomplete="off">
+                        </div>
+                    </div>
+                    <button class="submit-answer-btn" id="submitMode2">Check Answer ✅</button>
+                `;
+            }
+
+            handleMode2Answer() {
+                const pastInput = document.getElementById('mode2-past');
+                const partInput = document.getElementById('mode2-participle');
+                const verb = this.questions[this.currentIndex];
+
+                const pastVal = pastInput.value.trim().toLowerCase();
+                const partVal = partInput.value.trim().toLowerCase();
+                const pastCorrect = verb.past.toLowerCase();
+                const partCorrect = verb.participle.toLowerCase();
+
+                const pastOk = pastVal === pastCorrect;
+                const partOk = partVal === partCorrect;
+
+                this.isAnswered = true;
+                pastInput.disabled = true;
+                partInput.disabled = true;
+                document.getElementById('submitMode2').disabled = true;
+
+                if (pastOk) pastInput.classList.add('correct-input');
+                else pastInput.classList.add('wrong-input');
+
+                if (partOk) partInput.classList.add('correct-input');
+                else partInput.classList.add('wrong-input');
+
+                if (pastOk && partOk) {
+                    this.updateScore(10);
+                    this.feedback.textContent = '✅ Perfect! +10 points! 🎉';
+                    this.feedback.className = 'feedback correct';
+                    this.correctCount++;
+                    this.checkMilestone();
+                } else {
+                    this.updateScore(-10);
+                    let msg = '❌ Wrong! -10 points. 😅';
+                    if (!pastOk) msg += ` Past: "${verb.past}"`;
+                    if (!partOk) msg += ` Participle: "${verb.participle}"`;
+                    this.feedback.textContent = msg;
+                    this.feedback.className = 'feedback wrong';
+                }
+
+                this.showNextButton();
+            }
+
+            // ============================================================
+            //  MODE 3: GRAMMAR GURU (FIXED!)
+            // ============================================================
+
+            renderMode3(item) {
+                const wrong = item.wrong;
+                const correct = item.correct;
+
+                // Shuffle options (no correct/incorrect labels!)
+                const options = this.shuffleArray([wrong, correct]);
+                const optionsHtml = options.map(val =>
+                    `<option value="${val}">${val}</option>`
+                ).join('');
+
+                return `
+                    <div class="question-hint">🔍 Find the wrong form and select the correct one:</div>
+                    <div class="sentence-display">${item.sentence}</div>
+                    <div class="dropdown-group">
+                        <label style="font-weight:600;color:#FF69B4;">Select the correct form:</label>
+                        <select id="mode3-select">
+                            <option value="">-- Choose --</option>
+                            ${optionsHtml}
+                        </select>
+                    </div>
+                `;
+            }
+
+            handleMode3Answer() {
+                const select = document.getElementById('mode3-select');
+                const selected = select.value;
+                const item = this.questions[this.currentIndex];
+                const correct = item.correct;
+
+                if (!selected) return;
+
+                this.isAnswered = true;
+                select.disabled = true;
+
+                if (selected === correct) {
+                    select.classList.add('correct-select');
+                    this.updateScore(10);
+                    this.feedback.textContent = '✅ Correct! +10 points! 🎉';
+                    this.feedback.className = 'feedback correct';
+                    this.correctCount++;
+                    this.checkMilestone();
+                } else {
+                    select.classList.add('wrong-select');
+                    this.updateScore(-10);
+                    this.feedback.textContent = `❌ Wrong! -10 points. Correct: "${correct}" 😅`;
+                    this.feedback.className = 'feedback wrong';
+                }
+
+                this.showNextButton();
+            }
+
+            // ============================================================
+            //  COMMON METHODS
+            // ============================================================
+
+            updateScore(points) {
+                this.score += points;
+                this.scoreDisplay.textContent = this.score;
+                this.scoreDisplay.style.transform = 'scale(1.4)';
+                setTimeout(() => {
+                    this.scoreDisplay.style.transform = 'scale(1)';
+                }, 200);
+            }
+
+            checkMilestone() {
+                if (this.correctCount > 0 && this.correctCount % 10 === 0 && this.correctCount !== this.lastMilestoneCount) {
+                    this.lastMilestoneCount = this.correctCount;
+                    setTimeout(() => {
+                        this.showMilestone();
+                    }, 400);
+                }
+            }
+
+            showMilestone() {
+                document.getElementById('milestoneOverlay').classList.add('active');
+                this.spawnConfetti();
+            }
+
+            spawnConfetti() {
+                const container = document.getElementById('confettiContainer');
+                const colors = ['#FF69B4', '#FFB6C1', '#FF1493', '#C71585', '#FF6B9D', '#FFA0C0'];
+
+                for (let i = 0; i < 80; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random() * 100 + '%';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.width = (Math.random() * 8 + 4) + 'px';
+                    piece.style.height = (Math.random() * 8 + 4) + 'px';
+                    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    piece.style.animationDelay = (Math.random() * 1.5) + 's';
+                    container.appendChild(piece);
+                }
+
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 4000);
+            }
+
+            showNextButton() {
+                this.nextBtn.classList.add('show');
+            }
+
+            nextQuestion() {
+                this.currentIndex++;
+                if (this.currentIndex >= this.totalQuestions) {
+                    this.goHome();
+                } else {
+                    this.renderQuestion();
+                }
+            }
+
+            goHome() {
+                document.getElementById('gameScreen').classList.remove('active');
+                document.getElementById('homeScreen').classList.add('active');
+                document.getElementById('milestoneOverlay').classList.remove('active');
+            }
+
+            shuffleArray(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+        }
+
+        // ================================================================
+        //  INIT
+        // ================================================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = new Game();
+            window.game = game;
+        });
+
+        // ================================================================
+        //  SERVICE WORKER (offline)
+        // ================================================================
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+
+        if ('caches' in window) {
+            caches.open('pink-poodle-v1').then(cache => {
+                cache.add(window.location.href).catch(() => {});
+            });
+        }
+
+        console.log('🐾 Pink Poodle Verbs loaded! 🎀');
+    </script>
+</body>
+</html>
